@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <template id="report_petty_cash_document">
+            <t t-call="fs_petty_cash.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <div class="page">
+                    <div class="row" style="margin-top: 50px!important;margin-bottom: 50px!important;">
+                        <h5 style="text-align: center!important;width: 100%!important;" t-if="not general_cash"><strong>PETTY CASH VOUCHER</strong></h5>
+                        <h5 style="text-align: center!important;width: 100%!important;" t-if="general_cash"><strong>GENERAL VOUCHER</strong></h5>
+                    </div>
+                    <div id="informations" class="row mt32 mb32">
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.name" name="voucher_number">
+                            <strong>Voucher Number:</strong>
+                            <p class="m-0" t-field="o.name"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.date" name="accounting_date">
+                            <strong>Accounting Date:</strong>
+                            <p class="m-0" t-field="o.date"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.ref" name="reference">
+                            <strong>Reference:</strong>
+                            <p class="m-0" t-field="o.ref"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.journal_id" name="journal">
+                            <strong>Journal:</strong>
+                            <p class="m-0" t-field="o.journal_id.name"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.payee" name="payee">
+                            <strong>Payee:</strong>
+                            <p class="m-0" t-field="o.payee"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.document_description" name="document_description">
+                            <strong>Document Description:</strong>
+                            <p class="m-0" t-field="o.document_description"/>
+                        </div>
+                    </div>
+
+                    <div id="informations" class="row mt32 mb32">
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.cheque_date" name="cheque_date">
+                            <strong>Cheque Date:</strong>
+                            <p class="m-0" t-field="o.cheque_date"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.cheque_no" name="cheque_no">
+                            <strong>Cheque Number:</strong>
+                            <p class="m-0" t-field="o.cheque_no"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.mode_of_payment" name="mode_of_paymento">
+                            <strong>Mode Of Payment:</strong>
+                            <p class="m-0" t-field="o.mode_of_payment"/>
+                        </div>
+                    </div>
+
+
+                    <table class="table table-sm o_main_table" name="entry_table">
+                        <thead>
+                            <tr>
+                                <th name="th_account" class="text-left"><span>Account</span></th>
+                                <th name="th_partner" class="text-left"><span>Partner</span></th>
+                                <th name="th_description" class="text-left"><span>Description</span></th>
+                                <td name="th_analytic_account" class="text-left"><strong>Project</strong></td>
+                                <th name="th_debit" class="text-left"><span>Debit</span></th>
+                                <th name="th_credit" class="text-right">
+                                    <span>Credit</span>
+                                </th>
+                                <!-- <th name="th_tax_grids" class="text-right">
+                                    <span>Tax Grids</span>
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody class="entry_tbody" style="height: 500px;">
+                            <t t-foreach="o.line_ids" t-as="line">
+                                <tr>
+                                    <td class="text-left"><t t-esc="line.account_id.name"/></td>
+                                    <td class="text-left"><t t-esc="line.partner_id.name"/></td>
+                                    <td class="text-left"><t t-esc="line.name"/></td>
+                                    <td class="text-left"><t t-esc="line.analytic_account_id.project_ids[:1].job_number"/></td>
+                                    <td class="text-left"><t t-esc="line.debit" t-options="{'widget': 'monetry', 'display_currency': line.currency_id}"/></td>
+                                    <td class="text-right"><t t-esc="line.credit" t-options="{'widget': 'monetry', 'display_currency': line.currency_id}"/></td>
+                                    <!-- <td class="text-right"><t t-esc="','.join(map(lambda x: (x.description or x.name), line.tax_tag_ids))"/></td> -->
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_petty_cash">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="general_cash" t-value="False"/>
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang"/>
+                    <t t-call="fs_petty_cash.report_petty_cash_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_general_cash">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang"/>
+                    <t t-set="general_cash" t-value="True"/>
+                    <t t-call="fs_petty_cash.report_petty_cash_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

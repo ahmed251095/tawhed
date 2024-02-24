@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_payment_receipt_inherit_document" inherit_id="account.report_payment_receipt_document">
+        <xpath expr="//div[hasclass('mb-4')][1]" position="inside">
+            <div class="row">
+                <div class="col-6" t-if="o.cheque_date">
+                    Cheque Date: <span t-field="o.cheque_date"/>
+                </div>
+                <div class="col-6" t-if="o.cheque_no">
+                    Cheque No: <span t-field="o.cheque_no"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" t-if="o.mode_of_payment">
+                    Mode Of Payment: <span t-field="o.mode_of_payment"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

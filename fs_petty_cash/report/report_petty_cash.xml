@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_action_petty_cash" model="ir.actions.report">
+            <field name="name">Petty Cash</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">fs_petty_cash.report_petty_cash</field>
+            <field name="report_file">fs_petty_cash.report_petty_cash</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_action_general_cash" model="ir.actions.report">
+            <field name="name">General Voucher</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">fs_petty_cash.report_general_cash</field>
+            <field name="report_file">fs_petty_cash.report_general_cash</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

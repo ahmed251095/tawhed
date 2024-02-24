@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_payment_receipt_inherited_document" inherit_id="account.report_payment_receipt_document">
+        <xpath expr="//h3" position="replace">
+            <h3>
+                <t t-if="o.payment_type == 'inbound'">
+                    <strong>Receipt Voucher: <span t-field="o.name"/></strong>
+                </t>
+                <t t-if="o.payment_type == 'outbound'">
+                    <strong>Payment Voucher: <span t-field="o.name"/></strong>
+                </t>
+            </h3>
+        </xpath>
+    </template>
+</odoo>

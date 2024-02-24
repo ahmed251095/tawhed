@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_sales_person_user" model="res.groups">
+            <field name="name">Sales Person</field>
+            <field name="category_id" ref="odoo_job_costing_management.module_category_construction"/>
+        </record>
+
+    </data>
+</odoo>

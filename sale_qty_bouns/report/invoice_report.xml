@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_customized_invoice" inherit_id="account.report_invoice_document">
+            <xpath expr="//table[1]/thead/tr/th[1]" position="before">
+                <t t-if="o.move_type in ('out_invoice','out_refund','out_receipt')">
+                    <th class="text-right">Bouns</th>
+                </t>
+            </xpath>
+            <xpath expr="//table[@name='invoice_line_table']" position="before">
+                <t t-if="o.move_type in ('out_invoice','out_refund','out_receipt')">
+                    <div dir="rtl">
+                        <strong>اسم المندوب :</strong><span t-field="o.mandoub_id.name"/><br/>
+                        <strong>اسم السائق :</strong><span t-field="o.driver_id.name"/>
+                    </div>
+                </t>
+            </xpath>
+
+            <xpath expr="//table[@name='invoice_line_table']/tbody/t[3]/tr/t/td[1]" position="before">
+                <t t-if="o.move_type in ('out_invoice','out_refund','out_receipt')">
+                    <td class="text-right">
+                        <span t-field="line.is_bouns"/>
+                    </td>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

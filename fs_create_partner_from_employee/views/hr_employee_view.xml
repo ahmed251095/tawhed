@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_set_partner_in_employee" model="ir.actions.server">
+        <field name="name">Set Partner in Employee</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                for rec in records:
+                    rec.set_related_partner_in_employee()
+        </field>
+    </record>
+
+    <record id="view_employee_inherited_form" model="ir.ui.view">
+        <field name="name">hr.employee.inherited.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="partner_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

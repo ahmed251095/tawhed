@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="fs_view_picking_internal_inherit_search" model="ir.ui.view">
+            <field name="name">fs.stock.picking.internal.inherit.search</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='picking_type_id']" position="after">
+                    <field name="is_consumption"/>
+                    <filter name="my_consumption" string="Consumption" domain="[('is_consumption', '=', True)]"/>
+                </xpath>
+            </field>
+        </record>
+
+       <record id="action_consumption_do" model="ir.actions.act_window">
+            <field name="name">Consumption</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{'contact_display': 'partner_address', 'default_company_id': allowed_company_ids[0], 'default_is_consumption': 1, 'search_default_my_consumption': 1}</field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <menuitem
+            id="consumption_menu"
+            name="Consumption"
+            parent="stock.menu_stock_warehouse_mgmt"
+            sequence="4"
+            action="action_consumption_do"
+            groups="stock.group_stock_manager,stock.group_stock_user"/>
+
+    </data>
+</odoo>
