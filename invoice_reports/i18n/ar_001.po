@@ -1,0 +1,121 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* invoice_reports
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-07 12:40+0000\n"
+"PO-Revision-Date: 2024-07-07 15:41+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Language: ar\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: invoice_reports
+#: model_terms:ir.ui.view,arch_db:invoice_reports.invoice_external_layout_boxed
+msgid ""
+"<span style=\"margin-right:10px;\"/>\n"
+"                    Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: invoice_reports
+#: model_terms:ir.ui.view,arch_db:invoice_reports.invoices
+msgid "<span>Customer Debit:</span>"
+msgstr "المديونية السابقة"
+
+#. module: invoice_reports
+#: model_terms:ir.ui.view,arch_db:invoice_reports.invoice_external_layout_boxed
+msgid "<span>Print Date: </span>"
+msgstr "تاريخ الطباعة"
+
+#. module: invoice_reports
+#: model_terms:ir.ui.view,arch_db:invoice_reports.invoices
+msgid "<strong>Address:</strong>"
+msgstr "العنوان"
+
+#. module: invoice_reports
+#: model_terms:ir.ui.view,arch_db:invoice_reports.invoices
+msgid "<strong>Customer:</strong>"
+msgstr "العميل"
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_account_bank_statement_line__address
+#: model:ir.model.fields,field_description:invoice_reports.field_account_move__address
+#: model:ir.model.fields,field_description:invoice_reports.field_account_payment__address
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company__address
+msgid "Address"
+msgstr "العنوان"
+
+#. module: invoice_reports
+#: model:ir.actions.act_window,name:invoice_reports.company_company_action
+#: model:ir.ui.menu,name:invoice_reports.company_company_menu
+msgid "Companies"
+msgstr "الشركات "
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_account_bank_statement_line__company_name
+#: model:ir.model.fields,field_description:invoice_reports.field_account_move__company_name
+#: model:ir.model.fields,field_description:invoice_reports.field_account_payment__company_name
+msgid "Company Name"
+msgstr "اسم الشركة"
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company__id
+msgid "ID"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model,name:invoice_reports.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model.fields,field_description:invoice_reports.field_company_company__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: invoice_reports
+#: model_terms:ir.ui.view,arch_db:invoice_reports.invoice_external_layout_boxed
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: invoice_reports
+#: model:ir.model,name:invoice_reports.model_company_company
+msgid "company.company"
+msgstr ""

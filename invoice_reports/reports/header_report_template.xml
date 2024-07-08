@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!--    <template id="branch_external_layout_bold" inherit_id="web.external_layout_bold">-->
+<!--        <xpath expr="//span[@t-if='company.company_details']" position="replace">-->
+<!--            <t t-if="o.name == 'account.move'">-->
+<!--                <div class="col-5 offset-1" name="company_address">-->
+<!--                    <ul class="list-unstyled">-->
+<!--                        <strong>-->
+<!--                            <li t-if="o.company_name"><span t-esc="o.company_name.name"/></li>-->
+<!--                        </strong>-->
+<!--                        <li t-if="o.company_name.name"><span t-field="o.company_name.name"/></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--            <t t-else="else">-->
+<!--                <span t-if="company.company_details" t-field="company.company_details"/>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+    <template id="invoice_external_layout_boxed" inherit_id="web.external_layout_boxed">
+        <xpath expr="//div[@t-attf-class='footer o_boxed_footer o_company_#{company.id}_layout']/div/div[2]" position="replace">
+            <div t-if="report_type == 'pdf'">
+                <t t-if="o and o._name == 'account.move'"  class="row mt128" dir="ltr">
+                    <span style="text-align:left;" dir="ltr">
+                        <span>Print Date: </span>
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')"/>
+                    </span>
+                    <span style="margin-right:10px;"></span>
+                    Page: <span class="page"/> / <span class="topage"/>
+                </t>
+                <t t-else="else" >
+                     <div t-if="report_type == 'pdf'">
+                        Page: <span class="page"/> / <span class="topage"/>
+
+                     </div>
+                </t>
+
+                </div>
+
+        </xpath>
+        <xpath expr="//div[@class='o_boxed_header']/div/div[2]" position="replace">
+            <t t-if="o and o._name == 'account.move'">
+                <div class="col-6 text-end mb4">
+                    <br/>
+                    <strong>
+                            <span t-if="o.company_name"><span t-esc="o.company_name.name"/></span>
+                        </strong>
+                    <br/>
+                        <span t-if="o.company_name.address"><span t-field="o.company_name.address"/></span>
+
+                </div>
+            </t>
+            <t t-else="else">
+                <div class="col-6 text-end mb4">
+                    <div class="mt0 h4" t-field="company.report_header"/>
+                    <div name="company_address" class="float-end mb4">
+                        <span t-if="company.company_details" t-field="company.company_details"/>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+<!--    <template id="branch_external_layout_striped" inherit_id="web.external_layout_striped">-->
+<!--        <xpath expr="//div[hasclass('company_address')]" position="replace">-->
+<!--                <t t-if="branch">-->
+<!--                    <t t-if="branch.street or branch.street2 or branch.city or branch.state_id or branch.zip or branch.country_id">-->
+<!--                        <div class="float-left company_address"><br/><br/>-->
+<!--                            <span style="padding-left:0px" t-if="branch.street" t-field="branch.street"/>-->
+<!--                            <span t-if="branch.street2" t-field="branch.street2"/>-->
+<!--                            <span t-if="branch.city" t-field="branch.city"/>,-->
+<!--                            <span t-if="branch.zip" t-field="branch.zip"/>-->
+<!--                            <span t-if="branch.state_id" t-field="branch.state_id"/>-->
+<!--                            <span t-if="branch.country_id" t-field="branch.country_id"/>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                    <t t-else="else">-->
+<!--                        <div class="float-left company_address">-->
+<!--                            <span t-if="company.company_details" t-field="company.company_details"></span>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </t>-->
+<!--            <t t-else="else">-->
+<!--                <div class="float-left company_address">-->
+<!--                    <span t-if="company.company_details" t-field="company.company_details"></span>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//ul[hasclass('list-inline')]" position="replace">-->
+<!--            <t t-if="branch">-->
+<!--                <t class="list-inline mb4" t-if="branch.phone or branch.email or branch.website">-->
+<!--                    <span t-if="branch.phone" t-field="branch.phone"/>-->
+<!--                    <span t-if="branch.email" t-field="branch.email"/>-->
+<!--                    <span t-if="branch.website" t-field="branch.website"/>-->
+<!--                </t>-->
+<!--                <t t-else="else">-->
+<!--                    <ul class="list-inline mb4">-->
+<!--                        <div t-field="company.report_footer"/>-->
+<!--                    </ul>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--            <t t-else="else">-->
+<!--                <ul class="list-inline mb4">-->
+<!--                    <div t-field="company.report_footer"/>-->
+<!--                </ul>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+<!--    <template id="branch_external_layout_standard" inherit_id="web.external_layout_standard">-->
+<!--        <xpath expr="//div[@name='company_address']" position="replace">-->
+<!--            <t t-if="branch">-->
+<!--                <t t-if="branch.street or branch.street2 or branch.city or branch.state_id or branch.zip or branch.country_id">-->
+<!--                <div class="col-6" name="company_address">-->
+<!--                <span class="company_address" t-field="company.partner_id"/>,-->
+<!--                <span class="company_address" t-field="branch.name"/><br/>-->
+<!--                <span t-if="branch.street" t-field="branch.street"/><br/>-->
+<!--                <span t-if="branch.street2" t-field="branch.street2"/><br/>-->
+<!--                <span t-if="branch.city" t-field="branch.city"/>,-->
+<!--                <span t-if="branch.zip" t-field="branch.zip"/><br/>-->
+<!--                <span t-if="branch.state_id" t-field="branch.state_id"/><br/>-->
+<!--                <span t-if="branch.country_id" t-field="branch.country_id"/>-->
+<!--                </div>-->
+<!--                </t>-->
+<!--                <t t-else="else">-->
+<!--                <div class="col-6" name="company_address">-->
+<!--                    <span t-if="company.company_details" t-field="company.company_details"></span>-->
+<!--                </div>-->
+<!--                </t>-->
+
+<!--            </t>-->
+<!--            <t t-else="else">-->
+<!--                <div class="col-6" name="company_address">-->
+<!--                    <span t-if="company.company_details" t-field="company.company_details"></span>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//ul[hasclass('list-inline')]" position="replace">-->
+<!--            <t t-if="branch">-->
+<!--                <t class="list-inline mb4" t-if="branch.phone or branch.email or branch.website">-->
+<!--                    <span t-if="branch.phone" t-field="branch.phone"/>-->
+<!--                    <span t-if="branch.email" t-field="branch.email"/>-->
+<!--                    <span t-if="branch.website" t-field="branch.website"/>-->
+<!--                </t>-->
+<!--                <t t-else="else">-->
+<!--                    <ul class="list-inline mb4">-->
+<!--                        <div t-field="company.report_footer"/>-->
+<!--                    </ul>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--            <t t-else="else">-->
+<!--                <ul class="list-inline mb4">-->
+<!--                    <div t-field="company.report_footer"/>-->
+<!--                </ul>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--    </template>-->
+</odoo>

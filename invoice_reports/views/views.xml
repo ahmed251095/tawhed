@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="company_company_view_tree" model="ir.ui.view">
+        <field name="name">company.company.tree</field>
+        <field name="model">company.company</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom"  sample="1">
+                <field name="name" required="1"/>
+                <field name="address" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="company_company_action" model="ir.actions.act_window">
+        <field name="name">Companies</field>
+        <field name="res_model">company.company</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="company_company_menu" action="company_company_action" name="Companies"
+        sequence="55" parent="account.menu_finance_configuration"
+  />
+</odoo>
