@@ -5,12 +5,12 @@
            <xpath expr="//t[@t-call='web.external_layout']//div[1]" position="attributes">
                <attribute name="t-if">1==2</attribute>
            </xpath>
-           <xpath expr="//div[@name='payment_term']" position="attributes">
+           <xpath expr="//p[@name='payment_term']" position="attributes">
                <attribute name="t-if">1==2</attribute>
            </xpath>
-           <xpath expr="//t[@t-if='o.invoice_payment_term_id.display_on_invoice and payment_term_details']" position="attributes">
-               <attribute name="t-if">o.invoice_payment_term_id.display_on_invoice and payment_term_details and 1==2</attribute>
-           </xpath>
+<!--           <xpath expr="//t[@t-if='o.invoice_payment_term_id.display_on_invoice and payment_term_details']" position="attributes">-->
+<!--               <attribute name="t-if">o.invoice_payment_term_id.display_on_invoice and payment_term_details and 1==2</attribute>-->
+<!--           </xpath>-->
            <xpath expr="//div[@class='page']" position="inside">
                 <div class="row" dir="ltr">
                     <div class="col-6"></div>
