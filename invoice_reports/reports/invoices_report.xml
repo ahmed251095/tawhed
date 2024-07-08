@@ -8,35 +8,49 @@
            <xpath expr="//p[@name='payment_term']" position="attributes">
                <attribute name="t-if">1==2</attribute>
            </xpath>
-<!--           <xpath expr="//t[@t-if='o.invoice_payment_term_id.display_on_invoice and payment_term_details']" position="attributes">-->
-<!--               <attribute name="t-if">o.invoice_payment_term_id.display_on_invoice and payment_term_details and 1==2</attribute>-->
-<!--           </xpath>-->
-           <xpath expr="//div[@class='page']" position="inside">
+           <xpath expr="//t[@t-set='address']" position="attributes">
+               <attribute name="t-if">1==2</attribute>
+           </xpath>
+           <xpath expr="//t[@t-set='address']" position="after">
+              <div class="row" >
+                   <div class="col-6"></div>
+                   <div class="col-2"><strong>Customer:</strong></div>
+                   <div class="col-4 text-left"><strong><span t-field="o.partner_id"/></strong></div>
+               </div>
+               <div class="row">
+                   <div class="col-6"></div>
+
+                   <div class="col-2"><strong>Address:</strong></div>
+                   <div class="col-4 text-left"><strong><span t-field="o.address"/></strong></div>
+               </div>
+           </xpath>
+
+
+           <xpath expr="//div[@name='comment']" position="attributes">
+               <attribute name="t-if">1==2</attribute>
+           </xpath>
+           <xpath expr="//p[@name='payment_communication']" position="before">
                 <div class="row" dir="ltr">
                     <div class="col-6"></div>
 
-                    <div class="col-3"><span >Customer Debit:</span></div>
-                    <t t-set="due" t-value="o.partner_id.debit-o.amount_total"/>
-                    <div class="col-3"><span t-esc="due if due >=0 else 0"/> </div>
+                    <div class="col-3"><strong><span >Previous Debit:</span></strong></div>
+                    <t t-set="due" t-value="round(o.partner_id.credit-o.amount_total,2)"/>
+                    <div class="col-3"><strong><span t-esc="due if due >=0 else 0"/></strong> </div>
                 </div>
            </xpath>
 
-           <xpath expr="//div[@class='page']//h2" position="after">
-               <div class="row" >
-                   <div class="col-2"><strong>Customer:</strong></div>
-                   <div class="col-9 text-left"><strong><span t-field="o.partner_id"/></strong></div>
-               </div>
-               <div class="row">
-                   <div class="col-2"><strong>Address:</strong></div>
-                   <div class="col-9 text-left"><strong><span t-field="o.address"/></strong></div>
-               </div>
-           </xpath>
-       </template>
-<!--        <template id="invoices_eg" inherit_id="l10n_gcc_invoice.arabic_english_invoice">-->
-<!--           <xpath expr="//t[@t-call='web.external_layout']" position="attributes">-->
-<!--               <attribute name="t-call">sale_reports.external_layout_saleorder_report_commercial_invoice</attribute>-->
+<!--           <xpath expr="//div[@class='page']//h2" position="after">-->
+<!--               <div class="row" >-->
+<!--                   <div class="col-2"><strong>Customer:</strong></div>-->
+<!--                   <div class="col-9 text-left"><strong><span t-field="o.partner_id"/></strong></div>-->
+<!--               </div>-->
+<!--               <div class="row">-->
+<!--                   <div class="col-2"><strong>Address:</strong></div>-->
+<!--                   <div class="col-9 text-left"><strong><span t-field="o.address"/></strong></div>-->
+<!--               </div>-->
 <!--           </xpath>-->
-<!--       </template>-->
+       </template>
+
 
 
 
