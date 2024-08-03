@@ -42,7 +42,7 @@
         </xpath>
         <xpath expr="//div[@class='o_boxed_header']/div/div[2]" position="replace">
             <t t-if="o and o._name == 'account.move'">
-                <div class="col-6 text-right mb4">
+                <div class="col-6 text-right mb4" style="font-size:22px">
                     <br/>
                     <strong>
                             <span t-if="o.company_name"><span t-esc="o.company_name.name"/></span>

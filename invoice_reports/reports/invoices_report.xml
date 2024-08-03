@@ -12,25 +12,34 @@
                <attribute name="t-if">1==2</attribute>
            </xpath>
            <xpath expr="//t[@t-set='address']" position="after">
-              <div class="row" >
-                   <div class="col-6"></div>
+              <div class="row" style="font-size:20px">
+                   <div class="col-5"></div>
                    <div class="col-2"><strong>Customer:</strong></div>
-                   <div class="col-4 text-left"><strong><span t-field="o.partner_id"/></strong></div>
+                   <div class="col-5 text-left">
+                       <strong>
+<!--                           <span t-field="o.partner_id"/>-->
+                    <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+
+                       </strong>
+                   </div>
                </div>
-               <div class="row">
-                   <div class="col-6"></div>
+               <div class="row" style="font-size:20px">
+                   <div class="col-5"></div>
 
                    <div class="col-2"><strong>Address:</strong></div>
-                   <div class="col-4 text-left"><strong><span t-field="o.address"/></strong></div>
+                   <div class="col-5 text-left"><strong><span t-field="o.address"/></strong></div>
                </div>
            </xpath>
-
-
            <xpath expr="//div[@name='comment']" position="attributes">
                <attribute name="t-if">1==2</attribute>
            </xpath>
+
+           <xpath expr="//p[@name='payment_communication']" position="attributes">
+               <attribute name="t-if">1==2</attribute>
+           </xpath>
+
            <xpath expr="//p[@name='payment_communication']" position="before">
-                <div class="row" dir="ltr">
+                <div class="row" dir="ltr" style="font-size:19px">
                     <div class="col-6"></div>
 
                     <div class="col-3"><strong><span >Previous Debit:</span></strong></div>
@@ -38,21 +47,31 @@
                     <div class="col-3"><strong><span t-esc="due if due >=0 else 0"/></strong> </div>
                 </div>
            </xpath>
+           <xpath expr="//table[@name='invoice_line_table']" position="attributes">
+               <attribute name="style">font-size:19px</attribute>
+           </xpath>
+           <xpath expr="//div[@id='total']" position="attributes">
+               <attribute name="style">font-size:19px</attribute>
+           </xpath>
+           <xpath expr="//div[@id='informations']" position="attributes">
+               <attribute name="style">font-size:19px</attribute>
+           </xpath>
+            <xpath expr="//table[1]/thead/tr/th[@name='th_quantity']" position="attributes">
+                <attribute name="colspan">2</attribute>
+            </xpath>
+           <xpath expr="//table[@name='invoice_line_table']/tbody/t[3]/tr/t//span[@t-field='line.quantity']" position="replace">
+                <span t-esc="int(line.quantity)"/>
+           </xpath>
+           <xpath expr="//table[@name='invoice_line_table']/tbody/t[3]/tr/t//span[@t-field='line.product_uom_id']" position="replace">
+            </xpath>
 
-<!--           <xpath expr="//div[@class='page']//h2" position="after">-->
-<!--               <div class="row" >-->
-<!--                   <div class="col-2"><strong>Customer:</strong></div>-->
-<!--                   <div class="col-9 text-left"><strong><span t-field="o.partner_id"/></strong></div>-->
-<!--               </div>-->
-<!--               <div class="row">-->
-<!--                   <div class="col-2"><strong>Address:</strong></div>-->
-<!--                   <div class="col-9 text-left"><strong><span t-field="o.address"/></strong></div>-->
-<!--               </div>-->
-<!--           </xpath>-->
+            <xpath expr="//table[@name='invoice_line_table']/tbody/t[3]/tr/t/td[@class='text-right']" position="after">
+                    <td class="text-right">
+                        <span t-field="line.product_uom_id"  groups="uom.group_uom"/>
+                    </td>
+            </xpath>
+
+
        </template>
-
-
-
-
     </data>
 </odoo>
