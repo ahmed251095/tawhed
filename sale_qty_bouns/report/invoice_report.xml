@@ -11,7 +11,8 @@
                 <t t-if="o.move_type in ('out_invoice','out_refund','out_receipt')">
                     <div class="row" dir="rtl" style="font-size:19px">
                         <div class="col-12 text-right">
-                            <strong>اسم المندوب :</strong><span t-field="o.mandoub_id.name"/><br/>
+<!--                            <strong>اسم المندوب :</strong><span t-field="o.mandoub_id.name"/><br/>-->
+                            <strong>اسم المندوب :</strong><span t-field="o.invoice_user_id.name"/><br/>
                             <strong>اسم السائق :</strong><span t-field="o.driver_id.name"/>
                         </div>
 
