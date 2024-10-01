@@ -22,6 +22,8 @@
             <field name="inherit_id" ref="account.view_account_payment_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='ref']" position="after">
+                    <field name="partner_balance" />
+
                     <field name="employee_id" invisible="1"/>
                     <field name="sales_person_id"/>
                 </xpath>

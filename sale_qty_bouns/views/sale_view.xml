@@ -27,6 +27,10 @@
             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="before">
                 <field name="is_bouns" />
             </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='discount']" position="after">
+                <field name="price_after" />
+            </xpath>
+
             <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="before">
                 <field name="is_bouns" invisible="1"/>
             </xpath>

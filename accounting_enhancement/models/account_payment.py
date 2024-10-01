@@ -4,7 +4,6 @@ from odoo import fields, models, api
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
-
     employee_id = fields.Many2one('hr.employee',
                                   string='Employee',
                                   related='payment_id.employee_id', store=True
@@ -20,7 +19,18 @@ class AccountMoveLine(models.Model):
 
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
+    partner_balance = fields.Monetary('Partner Balance',compute='compute_partner_balance',store=True)
 
+    @api.depends("partner_id")
+    def compute_partner_balance(self):
+        total = 0
+        for k in self:
+            obj = self.env['account.move.line'].search([('partner_id', '=', k.partner_id.id)])
+            for i in obj:
+                if i.move_id.state == "posted":
+                    if i.account_id.user_type_id.type in ['payable', 'receivable']:
+                        total = total + (i.debit-i.credit)
+            k.partner_balance = total
     employee_id = fields.Many2one('hr.employee',
                                   string='Employee',
                                   tracking=True, copy=False

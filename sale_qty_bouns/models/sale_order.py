@@ -24,7 +24,11 @@ class AccountMoveline(models.Model):
         for rec in self:
             if rec.is_bouns == True:
                 rec.price_unit = 0
-
+    price_after = fields.Float(string='Price after disc.',compute='compute_price_after')
+    @api.depends('discount')
+    def compute_price_after(self):
+        for rec in self:
+            rec.price_after = (1-rec.discount/100) * rec.price_unit
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -40,6 +44,12 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
     is_bouns = fields.Boolean('Bouns ? ')
 
+    @api.onchange('price_unit')
+    @api.constrains('price_unit')
+    def _price_validation(self):
+        for rec in self:
+            if rec.price_unit < rec.product_id.standard_price:
+                raise UserError('Price Unit Must be >=  Product cost')
 
     @api.onchange('is_bouns')
     def _onchange_is_bouns(self):
