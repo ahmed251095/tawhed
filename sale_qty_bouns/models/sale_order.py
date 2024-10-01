@@ -44,11 +44,10 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
     is_bouns = fields.Boolean('Bouns ? ')
 
-    @api.onchange('price_unit')
-    @api.constrains('price_unit')
+    @api.constrains('price_unit','is_bouns')
     def _price_validation(self):
         for rec in self:
-            if rec.price_unit < rec.product_id.standard_price:
+            if rec.price_unit < rec.product_id.standard_price and rec.is_bouns:
                 raise UserError('Price Unit Must be >=  Product cost')
 
     @api.onchange('is_bouns')
