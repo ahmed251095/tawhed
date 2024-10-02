@@ -52,8 +52,26 @@ class AccountPayment(models.Model):
                 for line in payment.move_id.line_ids:
                     line.sales_person_id = payment.sales_person_id.id
         return res
+class CustomAccountMove(models.Model):
+    _inherit = 'account.move'
 
-
+    def onchange_analytic_move(self):
+        for rec in self :
+            print(rec.id)
+            record_analytic=self.env['account.move.line'].search([("move_id","=",rec.id),("sales_person_id","!=",None)],limit=1)
+            analytic=record_analytic.sales_person_id
+            records=self.env['account.move.line'].search([("move_id","=",rec.id),("sales_person_id","=",None)])
+            if records:
+                print("sssssssssssssssssssssssss")
+                for rec in records:
+                        rec.sales_person_id=analytic
+            else:
+                    print("ppppppppppppppppp")
+    @api.model
+    def create(self, vals):
+        record = super(CustomAccountMove, self).create(vals)
+        record.onchange_analytic_move()
+        return record
 class AccountPaymentRegister(models.TransientModel):
     _inherit = "account.payment.register"
     employee_id = fields.Many2one('hr.employee',
