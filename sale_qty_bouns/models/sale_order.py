@@ -48,7 +48,7 @@ class SaleOrderLine(models.Model):
     def _price_validation(self):
         for rec in self:
             if rec.price_unit < rec.product_id.standard_price and not rec.is_bouns:
-                raise UserError('Price Unit Must be >=  Product cost')
+                raise UserError('For product:{}\nPrice Unit Must be >=  Product cost'.format(rec.product_id.name))
 
     @api.onchange('is_bouns')
     def _onchange_is_bouns(self):

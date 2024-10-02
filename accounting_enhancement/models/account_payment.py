@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api,exceptions,_
 
 
 
@@ -37,6 +37,21 @@ class AccountPayment(models.Model):
                                   )
     sales_person_id = fields.Many2one("res.users", string="Sales Person")
 
+    def action_post(self):
+        for rec in self:
+            if rec.amount <= 0 :
+                raise exceptions.ValidationError(_("Please Set Amount > 0  First"))
+            if not rec.sales_person_id:
+                raise exceptions.ValidationError(_("Please Set Sales Person First"))
+        super().action_post()
+    def write(self, values):
+        # Add code here
+        res =  super(AccountPayment, self).write(values)
+        if 'sales_person_id' in values:
+            for payment in self:
+                for line in payment.move_id.line_ids:
+                    line.sales_person_id = payment.sales_person_id.id
+        return res
 
 
 class AccountPaymentRegister(models.TransientModel):
